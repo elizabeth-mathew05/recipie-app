@@ -1,0 +1,21 @@
+{
+  "name": "recipie-app-server",
+  "version": "1.0.0",
+  "description": "Recipe CRUD API built with Node.js, Express.js, and Mongoose.",
+  "main": "../recipes-mvc-backend/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node ../recipes-mvc-backend/server.js",
+    "dev": "node ../recipes-mvc-backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

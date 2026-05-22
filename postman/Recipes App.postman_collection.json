@@ -1,0 +1,172 @@
+{
+  "info": {
+    "_postman_id": "2a1c81b4-0f0b-4f5a-a8c0-4dc0f6b0d1a1",
+    "name": "Recipes App API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "CRUD documentation for the Recipes API. Each request includes a sample payload and the expected response shape."
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Checks whether the API is running."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Recipes API is running\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Recipe",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Creamy Pasta\",\n  \"description\": \"A quick and rich weeknight pasta.\",\n  \"ingredients\": [\"200g pasta\", \"1 cup cream\", \"2 cloves garlic\"],\n  \"instructions\": [\"Boil the pasta\", \"Prepare the sauce\", \"Mix and serve\"],\n  \"prepTime\": 10,\n  \"cookTime\": 20,\n  \"servings\": 2,\n  \"category\": \"Dinner\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1525755662778-989d0524087e\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/recipes",
+          "host": ["{{baseUrl}}"],
+          "path": ["recipes"]
+        },
+        "description": "Creates a new recipe document."
+      },
+      "response": [
+        {
+          "name": "201 Created",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Recipe created successfully\",\n  \"data\": {\n    \"recipe\": {\n      \"_id\": \"6650c2a2f0a12345ab678901\",\n      \"title\": \"Creamy Pasta\",\n      \"description\": \"A quick and rich weeknight pasta.\",\n      \"ingredients\": [\"200g pasta\", \"1 cup cream\", \"2 cloves garlic\"],\n      \"instructions\": [\"Boil the pasta\", \"Prepare the sauce\", \"Mix and serve\"],\n      \"prepTime\": 10,\n      \"cookTime\": 20,\n      \"servings\": 2,\n      \"category\": \"Dinner\",\n      \"imageUrl\": \"https://images.unsplash.com/photo-1525755662778-989d0524087e\",\n      \"totalTime\": 30\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get All Recipes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/recipes",
+          "host": ["{{baseUrl}}"],
+          "path": ["recipes"]
+        },
+        "description": "Returns all recipes sorted by creation date."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"status\": \"success\",\n  \"results\": 1,\n  \"data\": {\n    \"recipes\": []\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Recipe By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/recipes/{{recipeId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["recipes", "{{recipeId}}"]
+        },
+        "description": "Returns a single recipe by MongoDB ID."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"recipe\": {\n      \"_id\": \"6650c2a2f0a12345ab678901\",\n      \"title\": \"Creamy Pasta\"\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Recipe",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Creamy Garlic Pasta\",\n  \"servings\": 4\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/recipes/{{recipeId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["recipes", "{{recipeId}}"]
+        },
+        "description": "Updates fields on a recipe."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Recipe updated successfully\",\n  \"data\": {\n    \"recipe\": {\n      \"title\": \"Creamy Garlic Pasta\"\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Delete Recipe",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/recipes/{{recipeId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["recipes", "{{recipeId}}"]
+        },
+        "description": "Deletes a recipe by ID."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Recipe deleted successfully\",\n  \"data\": null\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "recipeId",
+      "value": "6650c2a2f0a12345ab678901"
+    }
+  ]
+}
