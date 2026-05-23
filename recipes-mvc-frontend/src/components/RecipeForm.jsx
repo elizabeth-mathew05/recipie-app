@@ -53,8 +53,8 @@ const RecipeForm = ({ initialValues, onSubmit, submitting, onCancel }) => {
   };
 
   return (
-    <form className="panel form" onSubmit={handleSubmit}>
-      <div className="panel__header">
+    <form className="panel form recipe-form two-column" onSubmit={handleSubmit}>
+      <div className="panel__header" style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <p className="eyebrow">{initialValues ? 'Update recipe' : 'New recipe'}</p>
           <h2>{initialValues ? 'Edit selected recipe' : 'Create a recipe'}</h2>
@@ -66,63 +66,81 @@ const RecipeForm = ({ initialValues, onSubmit, submitting, onCancel }) => {
         ) : null}
       </div>
 
-      <div className="form__grid">
+      <div className="col">
         <label>
           Title
           <input name="title" value={formData.title} onChange={handleChange} placeholder="Mango smoothie" />
         </label>
-        <label>
-          Category
-          <input name="category" value={formData.category} onChange={handleChange} placeholder="Breakfast" />
-        </label>
+
         <label>
           Prep time
           <input type="number" min="0" name="prepTime" value={formData.prepTime} onChange={handleChange} />
         </label>
-        <label>
-          Cook time
-          <input type="number" min="0" name="cookTime" value={formData.cookTime} onChange={handleChange} />
-        </label>
+
         <label>
           Servings
           <input type="number" min="1" name="servings" value={formData.servings} onChange={handleChange} />
         </label>
+
         <label>
           Image URL
           <input name="imageUrl" value={formData.imageUrl} onChange={handleChange} placeholder="https://..." />
         </label>
       </div>
 
-      <label>
-        Description
-        <textarea name="description" value={formData.description} onChange={handleChange} rows="3" />
-      </label>
+      <div className="col">
+        <label>
+          Category
+          <input name="category" value={formData.category} onChange={handleChange} placeholder="Breakfast" />
+        </label>
 
-      <label>
-        Ingredients
-        <textarea
-          name="ingredients"
-          value={formData.ingredients}
-          onChange={handleChange}
-          rows="5"
-          placeholder="One ingredient per line"
-        />
-      </label>
+        <label>
+          Cook time
+          <input type="number" min="0" name="cookTime" value={formData.cookTime} onChange={handleChange} />
+        </label>
 
-      <label>
-        Instructions
-        <textarea
-          name="instructions"
-          value={formData.instructions}
-          onChange={handleChange}
-          rows="6"
-          placeholder="One instruction per line"
-        />
-      </label>
+        <label>
+          
+        </label>
+      </div>
 
-      <button className="button button--primary" type="submit" disabled={submitting}>
-        {submitting ? 'Saving...' : initialValues ? 'Update recipe' : 'Create recipe'}
-      </button>
+      <div style={{ gridColumn: '1 / -1' }}>
+        <label>
+          Description
+          <textarea name="description" value={formData.description} onChange={handleChange} rows="3" />
+        </label>
+
+        <label>
+          Ingredients
+          <textarea
+            name="ingredients"
+            value={formData.ingredients}
+            onChange={handleChange}
+            rows="5"
+            placeholder="One ingredient per line"
+          />
+        </label>
+
+        <label>
+          Instructions
+          <textarea
+            name="instructions"
+            value={formData.instructions}
+            onChange={handleChange}
+            rows="6"
+            placeholder="One instruction per line"
+          />
+        </label>
+      </div>
+
+      <div className="form-actions" style={{ gridColumn: '1 / -1' }}>
+        <button className="button" type="button" onClick={onCancel} disabled={submitting}>
+          Cancel
+        </button>
+        <button className="button button--primary" type="submit" disabled={submitting}>
+          {submitting ? 'Saving...' : initialValues ? 'Update recipe' : 'Create recipe'}
+        </button>
+      </div>
     </form>
   );
 };

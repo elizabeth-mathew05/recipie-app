@@ -135,20 +135,52 @@ img {
   line-height: 1;
 }
 
+/* Full-width single column layout */
 .layout {
   display: grid;
-  grid-template-columns: minmax(320px, 440px) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
 }
 
 .panel {
-  background: var(--surface);
+  background: var(--bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border);
   border-radius: 28px;
   box-shadow: var(--shadow);
   padding: 24px;
+}
+
+/* Modal overlay and centered dialog */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(20, 14, 10, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  width: min(980px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  margin: 0;
+  align-self: center;
+  justify-self: center;
+}
+
+.modal .panel.form {
+  max-height: none;
+  overflow: visible;
+}
+
+.modal .form {
+  position: static;
+  top: auto;
 }
 
 .panel__header {
@@ -247,27 +279,36 @@ img {
 }
 
 .list-panel {
+  width: 100%;
   min-height: 100%;
 }
 
+/* Cards side by side */
 .recipe-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .recipe-card {
+  flex: 1 1 calc(50% - 8px);
   background: var(--surface-strong);
-  border-radius: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(31, 26, 23, 0.08);
-  display: grid;
-  box-shadow: 0 14px 34px rgba(92, 66, 49, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .recipe-card__media {
   height: 180px;
   background: linear-gradient(135deg, rgba(177, 75, 42, 0.2), rgba(177, 75, 42, 0.05));
+  overflow: hidden;
+}
+
+.recipe-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .recipe-card__fallback {
@@ -306,7 +347,8 @@ img {
 
 .recipe-card__actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  padding: 0 18px 18px;
 }
 
 .status-message {
@@ -347,10 +389,10 @@ img {
 }
 
 @media (max-width: 960px) {
-  .hero,
-  .layout {
-    grid-template-columns: 1fr;
-    display: grid;
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero__card {
@@ -374,13 +416,18 @@ img {
     border-radius: 22px;
   }
 
-  .form__grid,
+  .recipe-card {
+    flex: 1 1 100%;
+  }
+
+  .form__grid {
+    grid-template-columns: 1fr;
+  }
+
   .recipe-card__actions,
   .recipe-card__meta,
   .recipe-card__stats,
   .panel__header {
-    grid-template-columns: 1fr;
-    display: grid;
     flex-direction: column;
   }
 }

@@ -9,6 +9,7 @@ import { createRecipe, deleteRecipe, getAllRecipes, updateRecipe } from '../serv
 const RecipesPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [editingRecipe, setEditingRecipe] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
@@ -48,7 +49,8 @@ const RecipesPage = () => {
         await createRecipe(normalizedPayload);
         setStatus({ type: 'success', message: 'Recipe created successfully.' });
       }
-
+      // close modal and clear editing state
+      setIsModalOpen(false);
       setEditingRecipe(null);
       await loadRecipes();
     } catch (error) {
@@ -74,23 +76,21 @@ const RecipesPage = () => {
   };
 
   return (
-    <main className="app-shell">
+    <main className="app-shell app-shell--wide">
       <Header />
       <StatusMessage type={status.type} message={status.message} />
 
       <section className="layout">
-        <RecipeForm
-          initialValues={editingRecipe}
-          onSubmit={handleSubmit}
-          submitting={submitting}
-          onCancel={() => setEditingRecipe(null)}
-        />
-
         <section className="panel list-panel">
           <div className="panel__header">
             <div>
               <p className="eyebrow">Saved recipes</p>
               <h2>{recipes.length} recipes stored</h2>
+            </div>
+            <div>
+              <button type="button" className="button button--soft" onClick={() => { setEditingRecipe(null); setIsModalOpen(true); }}>
+                Add Recipe
+              </button>
             </div>
           </div>
 
@@ -101,12 +101,56 @@ const RecipesPage = () => {
           ) : (
             <div className="recipe-grid">
               {recipes.map((recipe) => (
-                <RecipeCard key={recipe._id} recipe={recipe} onEdit={setEditingRecipe} onDelete={handleDelete} />
+                <RecipeCard
+                  key={recipe._id}
+                  recipe={recipe}
+                  onEdit={(r) => { setEditingRecipe(r); setIsModalOpen(true); }}
+                  onDelete={handleDelete}
+                />
               ))}
             </div>
           )}
         </section>
       </section>
+
+      {isModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(20, 15, 10, 0.55)',
+            zIndex: 99,
+            display: 'grid',
+            placeItems: 'center',
+            padding: '20px',
+          }}
+        >
+          <div
+            className="panel"
+            style={{
+              width: 'min(720px, 100%)',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+            }}
+          >
+            <div className="panel__header">
+              <h2>{editingRecipe ? 'Edit Recipe' : 'Create Recipe'}</h2>
+              <button type="button" className="button button--ghost" onClick={() => { setIsModalOpen(false); setEditingRecipe(null); }}>
+                Close
+              </button>
+            </div>
+
+            <RecipeForm
+              initialValues={editingRecipe}
+              onSubmit={handleSubmit}
+              submitting={submitting}
+              onCancel={() => { setIsModalOpen(false); setEditingRecipe(null); }}
+            />
+          </div>
+        </div>
+      )}
     </main>
   );
 };
