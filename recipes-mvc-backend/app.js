@@ -10,6 +10,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Recipes API is running',
+    endpoints: {
+      health: '/api/health',
+      recipes: '/api/recipes'
+    }
+  });
+});
 
 app.get('/api/health', (req, res) => {
   res.status(200).json({
