@@ -7,7 +7,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://recipie-app-i0mw.onrender.com',
+        target: 'https://recipie-app-3.onrender.com ',
         changeOrigin: true
       }
     }

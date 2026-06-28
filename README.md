@@ -37,10 +37,10 @@ NODE_ENV=development
 Client `.env` example:
 
 ```env
-VITE_API_BASE_URL=https://recipie-app-i0mw.onrender.com/api
+VITE_API_BASE_URL=https://recipie-app-3.onrender.com/api
 ```
 
-In local development, the React app runs on port `3000` and can call the deployed backend API at `https://recipie-app-i0mw.onrender.com/api`.
+In local development, the React app runs on port `3000` and can call the deployed backend API at `https://recipie-app-3.onrender.com/api`.
 
 ## Running the App
 

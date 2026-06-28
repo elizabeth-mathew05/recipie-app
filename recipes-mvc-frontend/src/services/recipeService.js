@@ -1,5 +1,5 @@
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'https://recipie-app-i0mw.onrender.com/api';
+  import.meta.env.VITE_API_BASE_URL || 'https://recipie-app-3.onrender.com/api';
 
 const request = async (path, options = {}) => {
   const response = await fetch(`${API_BASE_URL}${path}`, {
