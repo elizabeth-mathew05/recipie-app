@@ -20,13 +20,13 @@ Example Response (200 OK):
 
 ```json
 {
-	"status": "success",
-	"data": {
-		"recipe": {
-			"_id": "6650c2a2f0a12345ab678901",
-			"title": "Creamy Pasta"
-		}
-	}
+  "status": "success",
+  "data": {
+    "recipe": {
+      "_id": "6650c2a2f0a12345ab678901",
+      "title": "Creamy Pasta"
+    }
+  }
 }
 ```
 
@@ -46,8 +46,8 @@ Request Body:
 
 ```json
 {
-	"title": "Creamy Garlic Pasta",
-	"servings": 4
+  "title": "Creamy Garlic Pasta",
+  "servings": 4
 }
 ```
 
@@ -66,13 +66,13 @@ Example Response (200 OK):
 
 ```json
 {
-	"status": "success",
-	"message": "Recipe updated successfully",
-	"data": {
-		"recipe": {
-			"title": "Creamy Garlic Pasta"
-		}
-	}
+  "status": "success",
+  "message": "Recipe updated successfully",
+  "data": {
+    "recipe": {
+      "title": "Creamy Garlic Pasta"
+    }
+  }
 }
 ```
 
@@ -94,9 +94,10 @@ Example Response (200 OK):
 
 ```json
 {
-	"status": "success",
-	"message": "Recipe deleted successfully",
-	"data": null
+  "status": "success",
+  "message": "Recipe deleted successfully",
+  "data": null
 }
 ```
+
 ## Public API documentation: https://documenter.getpostman.com/view/48839502/2sBY4TqJ1M
